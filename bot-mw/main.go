@@ -10,6 +10,7 @@ import (
 	tu "github.com/mymmrac/telego/telegoutil"
 )
 
+/*
 var botKeyboard = tu.Keyboard(
 	tu.KeyboardRow(
 		tu.KeyboardButton("/hi"),
@@ -17,6 +18,7 @@ var botKeyboard = tu.Keyboard(
 		tu.KeyboardButton("/status"),
 	),
 ).WithResizeKeyboard()
+*/
 
 func main() {
 
@@ -50,9 +52,9 @@ func main() {
 		case "/hi":
 			messageToUser = fmt.Sprintf("Привет, %s! Я твой бот-компаньон :)", message.From.FirstName)
 		case "/help":
-			messageToUser = fmt.Sprintf("Я понимаю команды /hi и /status) А смысл этого?....")
+			messageToUser = "Я понимаю команды /hi и /status) А смысл этого?...."
 		case "/status":
-			messageToUser = fmt.Sprintf("Я в порядке. Работаю... А ты?)")
+			messageToUser = "Я в порядке. Работаю... А ты?)"
 		}
 
 		_, _ = bot.SendMessage(tu.Messagef(
@@ -65,7 +67,8 @@ func main() {
 	bh.HandleMessage(func(bot *telego.Bot, message telego.Message) {
 		chatID := tu.ID(message.Chat.ID)
 		_, _ = bot.CopyMessage(
-			tu.CopyMessage(chatID, chatID, message.MessageID).WithReplyMarkup(botKeyboard),
+			tu.CopyMessage(chatID, chatID, message.MessageID),
+			//.WithReplyMarkup(botKeyboard),
 		)
 	})
 
